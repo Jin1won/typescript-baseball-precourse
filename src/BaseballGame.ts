@@ -1,18 +1,14 @@
 const BaseballGame = () => {
   const play = (
-    computerInputNumbers: number,
-    userInputNumbers: number
+    computerInputNumbers: string,
+    userInputNumbers: string
   ): string => {
     let ball = 0;
     let strike = 0;
 
-    const strComputerInputNumbers = computerInputNumbers.toString();
-    const strUserInputNumbers = userInputNumbers.toString();
-    ``;
-
-    for (let i = 0; i < strComputerInputNumbers.length; i++) {
-      for (let j = 0; j < strUserInputNumbers.length; j++) {
-        if (strComputerInputNumbers[i] === strUserInputNumbers[j]) {
+    for (let i = 0; i < computerInputNumbers.length; i++) {
+      for (let j = 0; j < userInputNumbers.length; j++) {
+        if (computerInputNumbers[i] === userInputNumbers[j]) {
           if (i === j) {
             strike++;
           } else {
@@ -22,15 +18,28 @@ const BaseballGame = () => {
         }
       }
     }
-
-    return `${ball}볼 ${strike}스트라이크`;
+    if (ball === 0 && strike === 0) {
+      return "낫싱";
+    } else if (ball === 0) {
+      return `${strike}스트라이크`;
+    } else if (strike === 0) {
+      return `${ball}볼`;
+    } else {
+      return `${ball}볼 ${strike}스트라이크`;
+    }
   };
 
   const result = document.getElementById("result");
+  const userInput = document.getElementById(
+    "user-input"
+  ) as HTMLInputElement | null;
 
   document.getElementById("submit").addEventListener("click", (event) => {
     event.preventDefault();
-    result.innerHTML = play(453, 456);
+    if (userInput != null) {
+      const inputValue = userInput.value;
+      result.innerHTML = play("123", inputValue);
+    }
   });
 };
 
