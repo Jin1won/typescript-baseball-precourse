@@ -1,8 +1,16 @@
 const BaseballGame = () => {
+  let visible = false;
+  document.getElementById("result-success").style.visibility = "hidden";
+
   const play = (
     computerInputNumbers: string,
     userInputNumbers: string
   ): string => {
+    if (computerInputNumbers === userInputNumbers) {
+      visible = true;
+      return;
+    }
+
     let ball = 0;
     let strike = 0;
 
@@ -34,11 +42,25 @@ const BaseballGame = () => {
     "user-input"
   ) as HTMLInputElement | null;
 
-  document.getElementById("submit").addEventListener("click", (event) => {
-    event.preventDefault();
-    if (userInput != null) {
-      const inputValue = userInput.value;
-      result.innerHTML = play("123", inputValue);
+  document.getElementById("app").addEventListener("click", (event) => {
+    const clickedTarget = event.target as HTMLInputElement | null;
+    switch (clickedTarget.textContent) {
+      case "확인":
+        event.preventDefault();
+        if (userInput != null) {
+          const inputValue = userInput.value;
+          result.innerHTML = play("123", inputValue);
+        }
+        if (visible) {
+          result.innerHTML = "";
+          document.getElementById("result-success").style.visibility =
+            "visible";
+        }
+        break;
+      case "게임 재시작":
+        visible = false;
+        document.getElementById("result-success").style.visibility = "hidden";
+        userInput.value = "";
     }
   });
 };
