@@ -49,6 +49,16 @@ const BaseballGame = () => {
         event.preventDefault();
         if (userInput != null) {
           const inputValue = userInput.value;
+          if (inputValue.length !== 3) {
+            alert("숫자를 3개 입력하세요");
+            return;
+          }
+          const set = new Set(inputValue);
+          if (set.size !== 3) {
+            alert("숫자를 중복 없이 입력하세요");
+            return;
+          }
+
           result.innerHTML = play("123", inputValue);
         }
         if (visible) {
