@@ -1,3 +1,5 @@
+import { Random } from "@woowacourse/mission-utils";
+
 const BaseballGame = () => {
   let visible = false;
   document.getElementById("result-success").style.visibility = "hidden";
@@ -42,6 +44,20 @@ const BaseballGame = () => {
     "user-input"
   ) as HTMLInputElement | null;
 
+  let inputNumber: string = "";
+
+  const generateRandomNumber = () => {
+    while (inputNumber.length < 3) {
+      const randomNumber = Random.pickNumberInRange(1, 9) + "";
+      if (!inputNumber.includes(randomNumber)) {
+        inputNumber = inputNumber + randomNumber;
+      }
+    }
+    console.log(inputNumber);
+  };
+
+  generateRandomNumber();
+
   document.getElementById("app").addEventListener("click", (event) => {
     const clickedTarget = event.target as HTMLInputElement | null;
     switch (clickedTarget.textContent) {
@@ -59,7 +75,7 @@ const BaseballGame = () => {
             return;
           }
 
-          result.innerHTML = play("123", inputValue);
+          result.innerHTML = play(inputNumber, inputValue);
         }
         if (visible) {
           result.innerHTML = "";
@@ -71,6 +87,8 @@ const BaseballGame = () => {
         visible = false;
         document.getElementById("result-success").style.visibility = "hidden";
         userInput.value = "";
+        inputNumber = "";
+        generateRandomNumber();
     }
   });
 };
