@@ -1,8 +1,13 @@
 import { Random } from "@woowacourse/mission-utils";
+import { INPUT_CONSTANTS } from "../constants/constants";
 
 const generateRandomNumber = (inputNumber) => {
-  while (inputNumber.length < 3) {
-    const randomNumber = Random.pickNumberInRange(1, 9) + "";
+  while (inputNumber.length < INPUT_CONSTANTS.LENGTH) {
+    const randomNumber =
+      Random.pickNumberInRange(
+        INPUT_CONSTANTS.RANGE_MIN,
+        INPUT_CONSTANTS.RANGE_MAX
+      ) + "";
     if (!inputNumber.includes(randomNumber)) {
       inputNumber = inputNumber + randomNumber;
     }

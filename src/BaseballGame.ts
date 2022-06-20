@@ -1,5 +1,6 @@
 import generateRandomNumber from "./utils/randomNumberGenerator";
 import play from "./utils/play";
+import { INPUT_CONSTANTS, ERROR_MESSAGES } from "./constants/constants";
 
 const BaseballGame = () => {
   let visible = false;
@@ -21,13 +22,13 @@ const BaseballGame = () => {
         event.preventDefault();
         if (userInput != null) {
           const inputValue = userInput.value;
-          if (inputValue.length !== 3) {
-            alert("숫자를 3개 입력하세요");
+          if (inputValue.length !== INPUT_CONSTANTS.LENGTH) {
+            alert(ERROR_MESSAGES.NOT_PROPER_LENGTH);
             return;
           }
           const set = new Set(inputValue);
-          if (set.size !== 3) {
-            alert("숫자를 중복 없이 입력하세요");
+          if (set.size !== INPUT_CONSTANTS.LENGTH) {
+            alert(ERROR_MESSAGES.DUPLICATION);
             return;
           }
 
