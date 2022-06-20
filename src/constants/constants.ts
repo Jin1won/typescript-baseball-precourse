@@ -7,4 +7,19 @@ const ERROR_MESSAGES = {
 
 const RESULT_MESSAGES = { NOTHING: "낫싱", BALL: "볼", STRIKE: "스트라이크" };
 
-export { INPUT_CONSTANTS, ERROR_MESSAGES, RESULT_MESSAGES };
+const SELECTOR = {
+  RESULT: "result",
+  RESULT_SUCCESS: "result-success",
+  USER_INPUT: "user-input",
+  APP: "app",
+};
+
+const BUTTON_CASE = { ENTER: "확인", RESTART: "게임 재시작" };
+
+export {
+  INPUT_CONSTANTS,
+  ERROR_MESSAGES,
+  RESULT_MESSAGES,
+  SELECTOR,
+  BUTTON_CASE,
+};

@@ -1,24 +1,31 @@
-import generateRandomNumber from "./utils/randomNumberGenerator";
+import randomNumberGenerator from "./utils/randomNumberGenerator";
 import play from "./utils/play";
-import { INPUT_CONSTANTS, ERROR_MESSAGES } from "./constants/constants";
+import {
+  INPUT_CONSTANTS,
+  ERROR_MESSAGES,
+  SELECTOR,
+  BUTTON_CASE,
+} from "./constants/constants";
 
 const BaseballGame = () => {
   let visible = false;
-  document.getElementById("result-success").style.visibility = "hidden";
+  document.getElementById(SELECTOR.RESULT_SUCCESS).style.visibility = "hidden";
 
-  const result = document.getElementById("result") as HTMLInputElement | null;
+  const result = document.getElementById(
+    SELECTOR.RESULT
+  ) as HTMLInputElement | null;
   const userInput = document.getElementById(
-    "user-input"
+    SELECTOR.USER_INPUT
   ) as HTMLInputElement | null;
 
   let computerRandomNumber: string = "";
 
-  computerRandomNumber = generateRandomNumber(computerRandomNumber);
+  computerRandomNumber = randomNumberGenerator(computerRandomNumber);
 
-  document.getElementById("app").addEventListener("click", (event) => {
+  document.getElementById(SELECTOR.APP).addEventListener("click", (event) => {
     const clickedTarget = event.target as HTMLInputElement | null;
     switch (clickedTarget.textContent) {
-      case "확인":
+      case BUTTON_CASE.ENTER:
         event.preventDefault();
         if (userInput != null) {
           const inputValue = userInput.value;
@@ -41,13 +48,14 @@ const BaseballGame = () => {
 
         if (visible) {
           result.innerHTML = "";
-          document.getElementById("result-success").style.visibility =
+          document.getElementById(SELECTOR.RESULT_SUCCESS).style.visibility =
             "visible";
         }
         break;
-      case "게임 재시작":
+      case BUTTON_CASE.RESTART:
         visible = false;
-        document.getElementById("result-success").style.visibility = "hidden";
+        document.getElementById(SELECTOR.RESULT_SUCCESS).style.visibility =
+          "hidden";
         userInput.value = "";
         computerRandomNumber = "";
         computerRandomNumber = generateRandomNumber(computerRandomNumber);
